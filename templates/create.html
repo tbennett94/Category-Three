@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        button:active {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create a New User</h1>
+    <form onsubmit="event.preventDefault(); performAction();">
+        <input type="text" id="username" placeholder="Enter Username" required>
+        <input type="password" id="password" placeholder="Enter Password" required>
+        <input type="text" id="role" placeholder="Enter Role (admin/user)" value="user">
+        <input type="text" id="brokerage" placeholder="Enter Brokerage deposit amount: ">
+        <input type="text" id="retiremenet" placeholder="Enter Retirement deposit amount: ">
+        <button type="submit">Create User</button><br>
+    </form>
+    <button onclick="navigateBack()">Back to Menu</button>
+
+    <script>
+        function performAction() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            const brokerage = document.getElementById('brokerage').value;
+            const retirement = document.getElementById('retiremenet').value;
+
+            fetch('/create_user', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password, role, brokerage, retirement }),
+            })
+                .then(response => response.json())
+                .then(data => alert(data.message || data.error))
+                .catch(error => alert('Error: ' + error.message));
+        }
+
+        function navigateBack() {
+            window.location.href = "admin"; // Redirect back to main menu
+        }
+    </script>
+</body>
+</html>

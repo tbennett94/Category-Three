@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:active {
+            background-color: #003f7f;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search for a User</h1>
+    <form onsubmit="event.preventDefault(); performSearch();">
+        <input type="text" id="username" placeholder="Enter Username" required>
+        <button type="submit">Search</button><br>
+    </form>
+    <button onclick="navigateBack()">Back to Main Menu</button>
+
+    <div id="result"></div>
+
+    <script>
+        function performSearch() {
+            const username = document.getElementById('username').value;
+
+            fetch(`/read_user/${username}`, { method: 'GET' })
+                .then(response => response.json())
+                .then(data => {
+                    const resultDiv = document.getElementById('result');
+                    if (data.error) {
+                        resultDiv.innerHTML = `<p style="color: red;">${data.error}</p>`;
+                    } else {
+                        resultDiv.innerHTML = `
+                            <p><strong>Username:</strong> ${data.Username}</p>
+                            <p><strong>Role:</strong> ${data.Role}</p>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('result').innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                });
+        }
+
+        function navigateBack() {
+            window.location.href = "admin"; // Redirect back to main menu
+        }
+    </script>
+</body>
+</html>

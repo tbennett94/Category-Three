@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, intitial-scale=1.0">
+	<title>Bennett Brokerage</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+
+</head>
+<body>
+	<h1>Bennett Brokerage</h1>
+	<div class="content">
+		<form action="/login" method="POST">
+			<p>
+				<label for="username"> Username</label>
+				<input type="text" id="username" name="username" required>
+				<label for="password"> Password</label>
+				<input type="password" id="password" name="password" required>
+			</p>
+			<p>
+				<label for="role"> Role:</label>
+			</p>
+			<p>
+				<input type="radio" id="user" name="role" value="user">
+				<label for="user">User</label><br>
+				<input type="radio" id="user" name="role" value="admin">
+				<label for="admin">Admin</label><br>
+				
+			</p>
+			<p>
+				<button type="submit">Login</button>
+			</p>
+		</form>
+	</div>
+
+
+
+</body>
+</html>

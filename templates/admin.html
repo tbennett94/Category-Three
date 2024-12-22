@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        button {
+            padding: 15px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        button:active {
+            background-color: #003f7f;
+        }
+        .exit {
+            background-color: #FF4D4D;
+        }
+        .exit:hover {
+            background-color: #cc0000;
+        }
+        .exit:active {
+            background-color: #990000;
+        }
+    </style>
+</head>
+<body>
+    <h1>CRUD Menu</h1>
+    <div class="menu">
+        <button onclick="navigateTo('create')">Create</button>
+        <button onclick="navigateTo('read')">Read</button>
+        <button onclick="navigateTo('update')">Update</button>
+        <button onclick="navigateTo('delete')">Delete</button>
+        <button class="exit" onclick="exitApp()">Exit</button>
+        </form>
+    </div>
+
+    <script>
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+
+        function exitApp() {
+            alert("Exiting the app.");
+            //Only works if the .py script opens web browser
+            window.close(); 
+        }
+    </script>
+</body>
+</html>
